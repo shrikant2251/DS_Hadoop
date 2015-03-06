@@ -1,3 +1,4 @@
+package HDFSPackage;
 public interface IDataNode {
 
 	/* ReadBlockResponse readBlock(ReadBlockRequest)) */

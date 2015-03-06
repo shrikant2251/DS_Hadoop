@@ -1,11 +1,12 @@
+package HDFSPackage;
 public interface INameNode {
 
 	/* OpenFileResponse openFile(OpenFileRequest) */
 	/* Method to open a file given file name with read-write flag*/
-	byte[] openFile(byte fileName[]);
+	byte[] openFile(byte input[]);
 	
 	/* CloseFileResponse closeFile(CloseFileRequest) */
-	byte[] closeFile(byte fileName[]);
+	byte[] closeFile(byte closeFileRequest[]);
 	
 	/* BlockLocationResponse getBlockLocations(BlockLocationRequest) */
 	/* Method to get block locations given an array of block numbers */
