@@ -1,4 +1,5 @@
 package HDFSPackage;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 
@@ -56,6 +57,7 @@ public interface RequestResponse {
 			catch(InvalidProtocolBufferException e){
 				e.printStackTrace();
 			}
+			status = new ArrayList<Integer>();
 			for(int i:builder.getStatusList())
 				status.add(i);
 		}
@@ -71,6 +73,7 @@ public interface RequestResponse {
 	public class DataNodeLocation {
 		public int ip;
 		public int port;
+		public long tstamp;
 		public DataNodeLocation(byte[] input) {
 			try {
 				 Hdfs.DataNodeLocation location = Hdfs.DataNodeLocation.parseFrom(input);
@@ -251,7 +254,7 @@ public interface RequestResponse {
 		}
 		public byte[] toProto(){
 			Hdfs.CloseFileResponse.Builder builder = Hdfs.CloseFileResponse.newBuilder();
-			builder.setStatus(status);	
+			builder.setStatus(status);
 			return builder.build().toByteArray();
 		}
 	}
