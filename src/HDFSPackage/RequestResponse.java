@@ -187,11 +187,11 @@ public interface RequestResponse {
 /*******************************************************************************************/
 	public class WriteBlockResponse {
 		public int status;
-
+		public WriteBlockResponse(){
+		}
 		public WriteBlockResponse(int s){
 			status = s;
 		}
-		
 		public WriteBlockResponse(byte[] input) {
 			Hdfs.WriteBlockResponse builder = null;
 			try{
@@ -202,7 +202,6 @@ public interface RequestResponse {
 			}
 			status = builder.getStatus();
 		}
-
 		public byte[] toProto(){
 			Hdfs.WriteBlockResponse.Builder builder = Hdfs.WriteBlockResponse.newBuilder();
 			builder.setStatus(status);	
@@ -263,9 +262,9 @@ public interface RequestResponse {
 		public int blockNumber;
 		public ArrayList<DataNodeLocation> locations;
 
-		public BlockLocations(int _bn, ArrayList<DataNodeLocation> _l){
-			blockNumber = _bn;
-			locations = _l;
+		public BlockLocations(int blockNum, ArrayList<DataNodeLocation> loc){
+			blockNumber = blockNum;
+			locations = loc;
 		}
 		public BlockLocations(byte[] input) {
 			Hdfs.BlockLocations builder = null;
@@ -281,7 +280,7 @@ public interface RequestResponse {
 			}
 		}
 
-		BlockLocations(Hdfs.BlockLocations builder){
+		public BlockLocations(Hdfs.BlockLocations builder){
 			blockNumber = builder.getBlockNumber();
 			locations = new ArrayList<RequestResponse.DataNodeLocation>();
 			for(Hdfs.DataNodeLocation bl : builder.getLocationsList()){
@@ -501,7 +500,7 @@ public interface RequestResponse {
 			public int status,handle;
 			public ArrayList<Integer> blockNums;
 			public OpenFileRespose(){
-				
+				blockNums = new ArrayList<Integer>();
 			}
 			public OpenFileRespose(int s,int h,ArrayList<Integer> blcks){
 				status = s;
@@ -527,8 +526,10 @@ public interface RequestResponse {
 				Hdfs.OpenFileResponse.Builder builder = Hdfs.OpenFileResponse.newBuilder();
 				builder.setStatus(status);
 				builder.setHandle(handle);
-				for(int blocks:blockNums)
-					builder.addBlockNums(blocks);
+				if(!blockNums.isEmpty()){
+					for(int blocks:blockNums)
+						builder.addBlockNums(blocks);
+				}
 				return builder.build().toByteArray();
 			}
 		}
@@ -560,7 +561,9 @@ public interface RequestResponse {
 		public class ReadBlockResponse {
 			public int status;
 			public byte data[];
-
+			public ReadBlockResponse(){
+				
+			}
 			public ReadBlockResponse(int st, byte[] dt){
 				status = st;
 				data = dt;
