@@ -107,6 +107,10 @@ public interface RequestResponse {
 /****************************************************************/
 	public class HeartBeatRequest {
 		public int id;
+		public HeartBeatRequest(int id) {
+			super();
+			this.id = id;
+		}
 		public HeartBeatRequest(byte[] input) {
 			Hdfs.HeartBeatRequest builder = null;
 			try {
@@ -116,7 +120,13 @@ public interface RequestResponse {
 			}
 			id =  builder.getId();
 		}
-		public HeartBeatRequest(int i) {
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public HeartBeatRequest(int i,int _ip,int _port) {
 			id = i;
 		}
 		public byte[] toProto() {
@@ -128,6 +138,7 @@ public interface RequestResponse {
 /****************************************************************/
 	public class HeartBeatResponse {
 		public int status;
+		public int id;
 		public HeartBeatResponse(int s){
 			status = s;
 		}

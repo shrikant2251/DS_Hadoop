@@ -169,8 +169,8 @@ public class GeneralClient {
 			}
 		}
 
-		status = close(openFileResponse.handle);
-		return status;
+		int status1 = close(openFileResponse.handle);
+		return status*status1;
 	}
 
 	public int write(String fileName, byte[] data) {
@@ -273,8 +273,9 @@ public class GeneralClient {
 			}
 		}
 		// close file
-		status = close(openFileResponse.handle);
-		return status;
+		
+		int status1 = close(openFileResponse.handle);
+		return status*status1;
 	}
 
 	public static void main(String[] args) {
