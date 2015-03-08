@@ -68,6 +68,7 @@ public class DataNode implements IDataNode {
 	public static int dataNodeID = 10;
 	public static String nameNodeIP = "127.0.0.1";
 	public static int heartBeatRate = 5000;
+
 	@Override
 	public byte[] readBlock(byte[] input) {
 		// TODO Auto-generated method stub
@@ -118,28 +119,30 @@ public class DataNode implements IDataNode {
 		try {
 			String meta = "metadata";
 			File fis = new File(meta);
+			FileWriter fw = null;
 			boolean flag = true;
-			if(!fis.exists())
-			{
+			if (!fis.exists()) {
 				flag = false;
+				fw = new FileWriter("metadata", false);
+			} else {
+				fw = new FileWriter("metadata", true);
 			}
-			FileWriter fw = new FileWriter("metadata", true);
-			
+
 			BufferedWriter bw = new BufferedWriter(fw);
-			if(flag){
-				String data = ","+writeBlockRequest.blockInfo.blockNumber ;
+			if (flag) {
+				String data = "," + writeBlockRequest.blockInfo.blockNumber;
+				bw.write(data);
+			} else {
+				String data = "" + writeBlockRequest.blockInfo.blockNumber;
+				bw.append(data);
 			}
-			else{
-				
-			}
-			//bw.append(data);
+			//
 			bw.flush();
 			bw.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		writeBlockResponse.status = status;
 		return writeBlockResponse.toProto();
 	}
@@ -157,6 +160,6 @@ public class DataNode implements IDataNode {
 
 		TimerTask perodicService = new PerodicService(in);
 		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(perodicService,0,heartBeatRate);
+		timer.scheduleAtFixedRate(perodicService, 0, heartBeatRate);
 	}
 }
