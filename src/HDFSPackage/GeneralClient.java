@@ -16,9 +16,8 @@ public class GeneralClient {
 		try {
 			Registry myreg = LocateRegistry.getRegistry("127.0.0.1", 1099);
 			INameNode in = (INameNode) myreg.lookup("NameNode");
-			OpenFileRequest openFileRequest = new OpenFileRequest("temp.txt",
-					false);
-			in.openFile(openFileRequest.toProto());
+			//OpenFileRequest openFileRequest = new OpenFileRequest("temp.txt",false);
+			//in.openFile(openFileRequest.toProto());
 			in.test();
 		} catch (Exception e) {
 			e.printStackTrace();
