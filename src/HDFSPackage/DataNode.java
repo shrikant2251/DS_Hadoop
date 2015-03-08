@@ -36,14 +36,26 @@ public class DataNode implements IDataNode{
 	@Override
 	public byte[] writeBlock(byte[] input) {
 		// TODO Auto-generated method stub
+		// status successful = 1 unsuccessful = -1
+		int status=1;
 		WriteBlockRequest writeBlockRequest = new WriteBlockRequest(input);
 		WriteBlockResponse writeBlockResponse = new WriteBlockResponse();
-		File  fileName = new File("" + writeBlockRequest.blockInfo.blockNumber);
-		ArrayList<DataNodeLocation> dataNodes = writeBlockRequest.blockInfo.locations;
-		byte []data = writeBlockRequest.data;
 		
+		// write into file 
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(""+writeBlockRequest.blockInfo.blockNumber));
+			bw.append(writeBlockRequest.data.toString());
+			bw.flush();
+			bw.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			status=-1;
+			e.printStackTrace();
+		}
 		/*Take data Node information from blockInfo Chaining call*/
-		return null;
+		writeBlockResponse.status=status;
+		return writeBlockResponse.toProto();
 	}
 
 }

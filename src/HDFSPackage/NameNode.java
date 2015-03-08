@@ -286,10 +286,10 @@ public class NameNode extends UnicastRemoteObject implements INameNode {
 			Registry reg = LocateRegistry.createRegistry(1099);
 			NameNode obj = new NameNode();
 			reg.rebind("NameNode", obj);
-			//System.out.println("NameNode server is running");
+			System.out.println("NameNode server is running");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//System.out.println("Hello");
+		System.out.println("Hello");
 	}
 }
