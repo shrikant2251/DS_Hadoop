@@ -313,6 +313,11 @@ public interface RequestResponse {
 	public class BlockLocationRequest {
 		ArrayList<Integer> blockNums;
 
+		public BlockLocationRequest(ArrayList<Integer> blockNums) {
+			super();
+			this.blockNums = blockNums;
+		}
+
 		BlockLocationRequest(byte[] input){
 			Hdfs.BlockReportRequest builder = null;
 			try {

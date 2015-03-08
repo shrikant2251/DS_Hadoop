@@ -1,9 +1,7 @@
 package HDFSPackage;
 
 	import java.util.ArrayList;
-	import java.util.HashMap;
-
-	import HDFSPackage.Hdfs.*;
+import java.util.HashMap;
 
 	public class AllDataStructures {
 		public static HashMap<String,ArrayList<Integer> > fileNameToBlockNum=new HashMap<String,ArrayList<Integer>>();
@@ -14,6 +12,9 @@ package HDFSPackage;
 		public static int blockNumber = 0;
 		public static int replicationFactor=2;
 		public static int thresholdTime=1000;
+		public static String nameNodeIP="127.0.0.1";
+		public static int nameNodePort=1099;
+		public static int blockSize = 65536;
 	}
 
 
